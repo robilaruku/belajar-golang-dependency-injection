@@ -37,7 +37,9 @@ func (controller *CategoryControllerImpl) Create(writer http.ResponseWriter, req
 }
 
 func (controller *CategoryControllerImpl) Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	
 	categoryUpdateRequest := web.CategoryUpdateRequest{}
+	
 	helper.ReadFromRequestBody(request, &categoryUpdateRequest)
 
 	categoryId := params.ByName("categoryId")
@@ -76,6 +78,7 @@ func (controller *CategoryControllerImpl) FindById(writer http.ResponseWriter, r
 	categoryId := params.ByName("categoryId")
 	id, err := strconv.Atoi(categoryId)
 	helper.PanicIfError(err)
+	
 
 	categoryResponse := controller.CategoryService.FindById(request.Context(), id)
 
