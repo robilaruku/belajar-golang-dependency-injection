@@ -3,9 +3,7 @@ package service
 import (
 	"context"
 	"database/sql"
-
 	"github.com/go-playground/validator/v10"
-
 	"robi/belajar-golang-restful-api/exception"
 	"robi/belajar-golang-restful-api/helper"
 	"robi/belajar-golang-restful-api/model/domain"
@@ -19,7 +17,7 @@ type CategoryServiceImpl struct {
 	Validate           *validator.Validate
 }
 
-func NewCategoryService(categoryRepository repository.CategoryRepository, DB *sql.DB, validate *validator.Validate) CategoryService {
+func NewCategoryService(categoryRepository repository.CategoryRepository, DB *sql.DB, validate *validator.Validate) *CategoryServiceImpl {
 	return &CategoryServiceImpl{
 		CategoryRepository: categoryRepository,
 		DB:                 DB,
@@ -99,5 +97,3 @@ func (service *CategoryServiceImpl) FindAll(ctx context.Context) []web.CategoryR
 
 	return helper.ToCategoryResponses(categories)
 }
-
-

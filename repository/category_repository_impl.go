@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-
 	"robi/belajar-golang-restful-api/helper"
 	"robi/belajar-golang-restful-api/model/domain"
 )
@@ -12,7 +11,7 @@ import (
 type CategoryRepositoryImpl struct {
 }
 
-func NewCategoryRepository() CategoryRepository {
+func NewCategoryRepository() *CategoryRepositoryImpl {
 	return &CategoryRepositoryImpl{}
 }
 
@@ -28,17 +27,17 @@ func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, 
 	return category
 }
 
-func (repository *CategoryRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, cateogry domain.Category) domain.Category {
+func (repository *CategoryRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Category {
 	SQL := "update category set name = ? where id = ?"
-	_, err := tx.ExecContext(ctx, SQL, cateogry.Name, cateogry.Id)
+	_, err := tx.ExecContext(ctx, SQL, category.Name, category.Id)
 	helper.PanicIfError(err)
 
-	return cateogry
+	return category
 }
 
-func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, cateogry domain.Category) {
+func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, category domain.Category) {
 	SQL := "delete from category where id = ?"
-	_, err := tx.ExecContext(ctx, SQL, cateogry.Id)
+	_, err := tx.ExecContext(ctx, SQL, category.Id)
 	helper.PanicIfError(err)
 }
 
